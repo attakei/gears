@@ -7,4 +7,8 @@
 #   all-features: false
 
 -e file:.
+annotated-types==0.6.0
 click==8.1.7
+pydantic==2.5.2
+pydantic-core==2.14.5
+typing-extensions==4.8.0
