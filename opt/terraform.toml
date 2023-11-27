@@ -1,0 +1,17 @@
+# This is using TOML format.
+description = "Terraform official build binary."
+version = "1.6.4"
+
+[targets.Linux-x86_64]
+url = "https://releases.hashicorp.com/terraform/1.6.4/terraform_1.6.4_linux_amd64.zip"
+archive = "zip"
+paths = [
+  "terraform",
+]
+
+[targets.Windows-AMD64]
+url = "https://releases.hashicorp.com/terraform/1.6.4/terraform_1.6.4_windows_amd64.zip"
+archive = "zip"
+paths = [
+  "terraform.exe",
+]
