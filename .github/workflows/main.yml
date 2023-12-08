@@ -43,6 +43,22 @@ jobs:
       - name: Run tests
         run: |
           pytest
+  doctest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          architecture: x64
+          python-version: ${{ env.BASE_PYTHON_VERSION }}
+      - name: Install dependencies
+        run: |
+          pip install -r requirements-dev.lock
+      - name: Try document buildings
+        run: |
+          make -C docs linkcheck
+          make -C docs dirhtml
   package:
     runs-on: ubuntu-latest
     steps:

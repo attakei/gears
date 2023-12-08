@@ -18,6 +18,11 @@ gears = "gears.cli:main"
 [project.urls]
 Repository = "https://github.com/attakei-lab/gears"
 
+[project.optional-dependencies]
+docs = [
+    "sphinx>=7.2.6",
+]
+
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
