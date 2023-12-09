@@ -6,6 +6,7 @@ authors = [
 ]
 dependencies = [
     "click>=8",
+    "pydantic>=2.5.2",
 ]
 readme = "README.rst"
 requires-python = ">= 3.11"
