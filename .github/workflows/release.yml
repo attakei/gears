@@ -1,0 +1,76 @@
+name: Release new version
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  # Build and configure package(s)
+  build:
+    strategy:
+      max-parallel: 4
+      matrix:
+        include:
+          - target: linux_x64
+            runner: ubuntu-latest
+            ext: ''
+          - target: macos_x64
+            runner: macos-latest
+            ext: ''
+          - target: windows_x64
+            runner: windows-latest
+            ext: '.exe'
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          architecture: x64
+          python-version: '3.11'
+      - name: Install dependencies
+        run: |
+          pip install -r requirements-dev.lock
+      - name: Build single-file executable
+        run: |
+          pyinstaller --name gears --onefile tools/cli.py
+          cd dist
+          mkdir gears-${{ github.ref_name }}-${{ matrix.target }}
+          mv gears${{ matrix.ext }} gears-${{ github.ref_name }}-${{ matrix.target }}/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist-${{ matrix.target }}
+          path: dist/
+  release:
+    needs:
+      - build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist/
+          merge-multiple: true
+      - name: Make zip for distribution
+        run: |
+          cd dist
+          folders=$(find . -maxdepth 1 -type d)
+          for folder in $folders; do
+            if [ "$folder" != "." ]; then
+              zip_file="${folder%/}.zip"
+              zip -r "$zip_file" "$folder"
+            fi
+          done
+      - name: Create release on GitHub
+        id: create-release
+        uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          artifacts: "dist/*.zip"
+          artifactContentType: application/gzip
+          draft: false
+          name: Release ${{ github.ref_name }}
+          omitBody: true
+          tag: ${{ github.ref_name }}
