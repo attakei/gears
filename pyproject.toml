@@ -22,10 +22,17 @@ Repository = "https://github.com/attakei-lab/gears"
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
+[tool.ruff]
+select = ["D"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "pep257"
+
 [tool.rye]
 managed = true
 dev-dependencies = [
     "pyinstaller==6.*",
+    "pytest==7.*",
 ]
 
 [tool.hatch.metadata]
