@@ -37,6 +37,9 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r requirements-dev.lock
+      - name: Run tests
+        run: |
+          pytest
   package:
     runs-on: ubuntu-latest
     steps:

@@ -19,7 +19,7 @@ repos:
     rev: 5.12.0
     hooks:
       - id: isort
-  - repo: https://github.com/PyCQA/pydocstyle
-    rev: 6.1.1
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.1.9
     hooks:
-      - id: pydocstyle
+      - id: ruff
