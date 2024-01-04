@@ -30,6 +30,7 @@ build-backend = "hatchling.build"
 
 [tool.ruff]
 select = ["D"]
+ignore = ["D105", "D107"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "pep257"
