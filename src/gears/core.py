@@ -1,5 +1,6 @@
 """Core classes for gears."""
 from pathlib import Path
+from typing import Tuple
 
 
 class RootDirectory:
@@ -30,3 +31,11 @@ class RootDirectory:
     def logs_dir(self) -> Path:
         """Directory of log output."""
         return self._root / "logs"
+
+    def verify(self) -> Tuple[bool, str | None]:
+        """Check that itself is rightly workspace(filebase)."""
+        if not self._root.exists():
+            return False, "Root directory is not exists."
+        if not self.settings_path.exists():
+            return False, "Settings file is not exists in root-directory."
+        return True, None

@@ -39,14 +39,29 @@ def resolve_root(*args) -> Path:
 @click.pass_context
 def app(ctx: click.Context, root: Path | None):  # noqa: D103
     root_path = resolve_root(root)
+    env = CLIEnvironment(root=core.RootDirectory(root_path))
+    ctx.obj = env
+    if ctx.invoked_subcommand == "init":
+        return
+    # If subcommand requires root-directory, verify it before running.
+    verified, reason = env.root.verify()
+    if not verified:
+        click.echo(click.style(reason, fg="red"))
+        ctx.exit(1)
     Logger.info(f"Root is {root_path}")
-    ctx.obj = CLIEnvironment(root=core.RootDirectory(root_path))
 
 
 @app.command()
 @click.pass_obj
 def init(env: CLIEnvironment):
     """Initialize root-directory."""
+    click.echo(click.style("This is not implemented!!", fg="red"))
+
+
+@app.command()
+@click.pass_obj
+def info(env: CLIEnvironment):
+    """Display workspace information."""
     click.echo(click.style("This is not implemented!!", fg="red"))
 
 
