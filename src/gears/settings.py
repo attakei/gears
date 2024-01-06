@@ -6,6 +6,8 @@ from jinja2 import Template
 from pydantic import BaseModel, Field
 from pydantic_settings import BaseSettings
 
+from . import templates
+
 
 class RepositorySettings(BaseModel):
     """Settings data of items repository."""
@@ -29,7 +31,6 @@ class Settings(BaseSettings):
 
 def initialize_settings(dist: Path):
     """Output settings-file for initialized user."""
-    templates_dir = Path(__file__).parent / "templates"
     context = {}
-    template = Template((templates_dir / "settings.toml.j2").read_text())
+    template = Template(templates.SETTINGS_TOML)
     dist.write_text(template.render(**context))
