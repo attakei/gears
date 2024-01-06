@@ -37,9 +37,10 @@ class RootDirectory:
 
         This method runs only to create directries, not to delete files.
         """
-        self._root.mkdir(exist_ok=True)
+        self._root.mkdir(exist_ok=True, parents=True)
         self.bin_dir.mkdir(exist_ok=True)
         self.logs_dir.mkdir(exist_ok=True)
+        self.repos_dir.mkdir(exist_ok=True)
 
     def verify(self) -> Tuple[bool, str | None]:
         """Check that itself is rightly workspace(filebase)."""
