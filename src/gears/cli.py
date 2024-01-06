@@ -74,7 +74,8 @@ def init(env: CLIEnvironment):
 @click.pass_obj
 def info(env: CLIEnvironment):
     """Display workspace information."""
-    click.echo(click.style("This is not implemented!!", fg="red"))
+    click.echo(f"Root directory is {env.root}")
+    click.echo(f"- {env.root.count_bin()} items are installed")
 
 
 def main():

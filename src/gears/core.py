@@ -48,3 +48,7 @@ class RootDirectory:
         if not self.settings_path.exists():
             return False, "Settings file is not exists in root-directory."
         return True, None
+
+    def count_bin(self) -> int:
+        """Count installed items to display."""
+        return len(list(self.bin_dir.iterdir()))
