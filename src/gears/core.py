@@ -32,6 +32,15 @@ class RootDirectory:
         """Directory of log output."""
         return self._root / "logs"
 
+    def make_dirs(self):
+        """Create root-directory with subs.
+
+        This method runs only to create directries, not to delete files.
+        """
+        self._root.mkdir(exist_ok=True)
+        self.bin_dir.mkdir(exist_ok=True)
+        self.logs_dir.mkdir(exist_ok=True)
+
     def verify(self) -> Tuple[bool, str | None]:
         """Check that itself is rightly workspace(filebase)."""
         if not self._root.exists():

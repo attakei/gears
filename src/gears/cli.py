@@ -6,7 +6,7 @@ from pathlib import Path
 
 import click
 
-from . import core
+from . import core, settings
 
 CONTEXT_SETTINGS = {
     "help_option_names": ["-h", "--help"],
@@ -55,7 +55,19 @@ def app(ctx: click.Context, root: Path | None):  # noqa: D103
 @click.pass_obj
 def init(env: CLIEnvironment):
     """Initialize root-directory."""
-    click.echo(click.style("This is not implemented!!", fg="red"))
+    if env.root.settings_path.exists():
+        click.echo("setting.toml is already exisis in root-directory.")
+        click.confirm("Override it?", abort=True)
+
+    env.root.make_dirs()
+    settings.initialize_settings(env.root.settings_path)
+    click.echo(click.style("Welcome to Gears!!", fg="green"))
+    click.echo(
+        click.style(
+            f"Please add '{env.root.bin_dir.resolve()}' into your PATH environment varibale.",  # noqa: E501
+            fg="green",
+        )
+    )
 
 
 @app.command()
