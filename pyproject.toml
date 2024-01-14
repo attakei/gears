@@ -22,6 +22,7 @@ Repository = "https://github.com/attakei-lab/gears"
 [project.optional-dependencies]
 docs = [
     "sphinx>=7.2.6",
+    "sphinx-autobuild==2021.3.14",
     "sphinx-rtd-theme==2.*",
 ]
 
