@@ -17,5 +17,6 @@ Documents
    :maxdepth: 2
 
    getting-started
+   root-directory
    glossary
    api
