@@ -5,7 +5,7 @@ author = "Kazuya Takei"
 release = "0.0.0"
 
 # -- General configuration ---------------------------------------------------
-extensions = ["sphinx.ext.todo"]
+extensions = ["sphinx.ext.autodoc", "sphinx.ext.todo"]
 templates_path = ["_templates"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 

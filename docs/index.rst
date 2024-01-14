@@ -18,3 +18,4 @@ Documents
 
    getting-started
    glossary
+   api
