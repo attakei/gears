@@ -78,6 +78,16 @@ def info(env: CLIEnvironment):
     click.echo(f"- {env.root.count_bin()} items are installed")
 
 
+@app.command()
+@click.pass_obj
+def self(env: CLIEnvironment):
+    """Access information of gears itself."""
+    from .models import get_spec_of_itself
+
+    spec = get_spec_of_itself()
+    click.echo(spec.detail_text)
+
+
 def main():
     """Entrypoint."""
     app()
