@@ -17,7 +17,7 @@ dynamic = ["description"]
 gears = "gears.cli:main"
 
 [project.urls]
-Repository = "https://github.com/attakei-lab/gears"
+Repository = "https://github.com/attakei/gears"
 
 [project.optional-dependencies]
 docs = [

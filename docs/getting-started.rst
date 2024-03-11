@@ -7,7 +7,7 @@ Installation
 
 Gears is distributed as "single-file executable" style.
 
-Get from `GitHub Releases <https://github.com/attakei-lab/gears/releases>`.
+Get from `GitHub Releases <https://github.com/attakei/gears/releases>`.
 
 Usage
 =====
